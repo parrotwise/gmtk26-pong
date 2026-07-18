@@ -2,6 +2,18 @@
 
 [ext_resource type="Script" uid="uid://cm6wy2um2uj00" path="res://Menu/main_menu.gd" id="1_sla5p"]
 [ext_resource type="PackedScene" uid="uid://djm2i4bbxb86c" path="res://Scenes/game_scene.tscn" id="2_ci1se"]
+[ext_resource type="Theme" uid="uid://cmohlg8ancb1r" path="res://Assets/Theme/the_theme.tres" id="2_dtkyu"]
+[ext_resource type="FontFile" uid="uid://q86l2pnsdds1" path="res://Assets/Font/MetalMania-Regular.ttf" id="3_ohgnh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kafe6"]
+font = ExtResource("3_ohgnh")
+font_size = 80
+font_color = Color(0, 0, 0, 1)
+outline_size = 9
+outline_color = Color(0.98480004, 0.775053, 7.70092e-07, 1)
+shadow_size = 6
+shadow_color = Color(0, 0, 0, 0.56078434)
+shadow_offset = Vector2(5, 5)
 
 [node name="MainMenu" type="Node2D" unique_id=403940985]
 script = ExtResource("1_sla5p")
@@ -11,9 +23,25 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(800, 450)
 layout_mode = 3
 anchors_preset = 0
+theme = ExtResource("2_dtkyu")
+
+[node name="CenterContainer2" type="CenterContainer" parent="Menu" unique_id=1307644251]
+custom_minimum_size = Vector2(0, 450)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 101.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Menu/CenterContainer2" unique_id=1482557920]
+layout_mode = 2
+text = "The Pong Wang Wars"
+label_settings = SubResource("LabelSettings_kafe6")
+horizontal_alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="Menu" unique_id=1173853177]
-custom_minimum_size = Vector2(0, 200)
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -29,7 +57,7 @@ layout_mode = 2
 [node name="Play" type="Button" parent="Menu/CenterContainer/VBoxContainer" unique_id=1430920628]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Play!"
+text = "Play"
 
 [node name="Quit" type="Button" parent="Menu/CenterContainer/VBoxContainer" unique_id=47914014]
 unique_name_in_owner = true
@@ -38,6 +66,7 @@ text = "Quit"
 
 [node name="GameScene" parent="." unique_id=2090212088 instance=ExtResource("2_ci1se")]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -45,3 +74,4 @@ offset_right = 800.0
 offset_bottom = 450.0
 grow_horizontal = 1
 grow_vertical = 1
+theme = ExtResource("2_dtkyu")

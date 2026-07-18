@@ -1,0 +1,36 @@
+[gd_resource type="Theme" format=3 uid="uid://cmohlg8ancb1r"]
+
+[ext_resource type="FontFile" uid="uid://q86l2pnsdds1" path="res://Assets/Font/MetalMania-Regular.ttf" id="1_up8hj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1378a"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+skew = Vector2(0.4, 0)
+border_width_left = 10
+border_width_right = 10
+border_color = Color(0.97655016, 0.77179134, 1.92523e-06, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hra53"]
+bg_color = Color(0, 0, 0, 1)
+skew = Vector2(0.4, 0)
+border_width_left = 10
+border_width_right = 10
+border_color = Color(0.88353246, 0.7000146, 0, 1)
+shadow_size = 1
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dtkyu"]
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 1)
+skew = Vector2(0.4, 0)
+shadow_size = 1
+shadow_offset = Vector2(5, 5)
+
+[resource]
+Button/colors/font_color = Color(1, 0.80761707, 0.32410368, 1)
+Button/colors/font_hover_color = Color(1, 0.80784315, 0.3254902, 1)
+Button/font_sizes/font_size = 20
+Button/fonts/font = ExtResource("1_up8hj")
+Button/styles/focus = SubResource("StyleBoxFlat_1378a")
+Button/styles/hover = SubResource("StyleBoxFlat_hra53")
+Button/styles/normal = SubResource("StyleBoxFlat_dtkyu")
