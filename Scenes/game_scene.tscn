@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://djm2i4bbxb86c"]
 
+[ext_resource type="Script" uid="uid://ke4slfpx5tjp" path="res://Scenes/game_scene.gd" id="1_5dgvu"]
 [ext_resource type="Script" uid="uid://ejpyehyvfe3j" path="res://Scripts/battlefield.gd" id="1_6h5vk"]
 [ext_resource type="Script" uid="uid://csel3sxxejg3t" path="res://Scripts/game_ui.gd" id="1_x87qo"]
 [ext_resource type="Script" uid="uid://x2chsq18dd8c" path="res://Scripts/player.gd" id="2_1ixah"]
@@ -26,12 +27,14 @@ bg_color = Color(0, 0, 0, 0)
 bg_color = Color(0, 0, 0, 0.4117647)
 
 [node name="GameScene" type="Control" unique_id=2090212088]
+custom_minimum_size = Vector2(800, 450)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_5dgvu")
 
 [node name="Background" type="Panel" parent="." unique_id=136088733]
 layout_mode = 1
