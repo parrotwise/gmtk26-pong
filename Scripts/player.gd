@@ -2,7 +2,15 @@ class_name Player
 extends CharacterBody2D
 
 
+var collider: CollisionShape2D:
+	get: return $Collider
+
+
 @export var speed: float = 150
+
+
+func _ready() -> void:
+	GameManager.player = self
 
 
 func _physics_process(_delta: float) -> void:

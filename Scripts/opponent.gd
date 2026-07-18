@@ -9,6 +9,8 @@ enum Direction {
 }
 
 
+var collider: CollisionShape2D:
+	get: return $Collider
 var position_y_min: float:
 	get: return $Collider.shape.height / 2
 var position_y_max: float:
@@ -24,6 +26,8 @@ var velocity: float
 func _ready() -> void:
 	direction = Direction.DOWN
 	velocity = 0
+
+	GameManager.opponent = self
 
 
 func _physics_process(delta: float) -> void:
