@@ -9,9 +9,13 @@ class_name HUD extends Control
 @onready var left_hearts: HBoxContainer = %LeftHearts
 @onready var right_hearts: HBoxContainer = %RightHearts
 
+var bar: TextureRect: 
+	get: return $Bar
+
 # Initialization
 func _ready() -> void:
 	# TODO: Register
+	GameManager.hud = self
 	
 	# Signals
 	quit_button.pressed.connect(_on_quit)

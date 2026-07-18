@@ -18,7 +18,7 @@ var position_x_min: float:
 var position_x_max: float:
 	get: return get_viewport().size.x
 var position_y_min: float:
-	get: return GameManager.ui.top_bar.size.y
+	get: return GameManager.hud.bar.size.y
 var position_y_max: float:
 	get: return get_viewport().size.y
 var collider_radius: float:

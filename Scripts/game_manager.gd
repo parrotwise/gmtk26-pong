@@ -1,7 +1,7 @@
 extends Node
 
 
-var ui: GameUI 
+var hud: HUD
 var ball: Ball
 var player: Player
 var opponent: Opponent
