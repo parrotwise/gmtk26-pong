@@ -1,6 +1,9 @@
 extends Node
 
 
+var ui: GameUI:
+	get: return $/root/GameScene/UI
+
 const INITIAL_BALL_SPEED: float = 240.0
 
 var ball_speed: float
