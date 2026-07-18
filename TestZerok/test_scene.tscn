@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dhx7rnw5s1w27"]
+
+[ext_resource type="Script" uid="uid://bplqvh0mhab68" path="res://TestZerok/test_scene.gd" id="1_8d73h"]
+
+[node name="TestScene" type="Node2D" unique_id=1825284074]
+script = ExtResource("1_8d73h")
