@@ -1,9 +1,15 @@
 [gd_scene format=3 uid="uid://djm2i4bbxb86c"]
 
+[ext_resource type="Script" uid="uid://ejpyehyvfe3j" path="res://Scripts/battlefield.gd" id="1_6h5vk"]
 [ext_resource type="Script" uid="uid://csel3sxxejg3t" path="res://Scripts/game_ui.gd" id="1_x87qo"]
+[ext_resource type="Script" uid="uid://x2chsq18dd8c" path="res://Scripts/player.gd" id="2_1ixah"]
+[ext_resource type="Texture2D" uid="uid://c8nuxrijrj7d8" path="res://icon.svg" id="2_fiftr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6fju"]
 bg_color = Color(0.43, 0.43, 0.43, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgj8m"]
+size = Vector2(128, 128)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6h5vk"]
 bg_color = Color(0, 0, 0, 0.4117647)
@@ -29,6 +35,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Background" type="Panel" parent="." unique_id=136088733]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_b6fju")
+
 [node name="Battlefield" type="Control" parent="." unique_id=454438475]
 layout_mode = 1
 anchors_preset = 15
@@ -36,6 +51,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_6h5vk")
 
 [node name="Objects" type="Control" parent="Battlefield" unique_id=389179091]
 layout_mode = 1
@@ -45,14 +61,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background" type="Panel" parent="Battlefield" unique_id=136088733]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_b6fju")
+[node name="Player" type="CharacterBody2D" parent="Battlefield/Objects" unique_id=1821175186]
+position = Vector2(200, 500)
+script = ExtResource("2_1ixah")
+
+[node name="Canvas" type="CanvasGroup" parent="Battlefield/Objects/Player" unique_id=1584502315]
+
+[node name="Sprite" type="Sprite2D" parent="Battlefield/Objects/Player/Canvas" unique_id=1435339467]
+texture = ExtResource("2_fiftr")
+
+[node name="Collider" type="CollisionShape2D" parent="Battlefield/Objects/Player" unique_id=1432668304]
+shape = SubResource("RectangleShape2D_rgj8m")
 
 [node name="UI" type="Control" parent="." unique_id=514686420]
 layout_mode = 1

@@ -1,0 +1,2 @@
+class_name Battlefield
+extends Control
