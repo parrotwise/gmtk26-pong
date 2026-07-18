@@ -3,30 +3,22 @@
 [ext_resource type="Script" uid="uid://ejpyehyvfe3j" path="res://Scripts/battlefield.gd" id="1_6h5vk"]
 [ext_resource type="Script" uid="uid://csel3sxxejg3t" path="res://Scripts/game_ui.gd" id="1_x87qo"]
 [ext_resource type="Script" uid="uid://x2chsq18dd8c" path="res://Scripts/player.gd" id="2_1ixah"]
-[ext_resource type="Texture2D" uid="uid://c8nuxrijrj7d8" path="res://icon.svg" id="2_fiftr"]
+[ext_resource type="Texture2D" uid="uid://c5e82as8sxtj" path="res://Sprites/p1_placeholder.png" id="3_rgj8m"]
 [ext_resource type="Script" uid="uid://dowrysm7015b3" path="res://Scripts/opponent.gd" id="4_1ixah"]
+[ext_resource type="Texture2D" uid="uid://da3ote4yfusag" path="res://Sprites/p2_placeholder.png" id="5_2fmhe"]
+[ext_resource type="Texture2D" uid="uid://b7jpgpuws8ief" path="res://Sprites/exit_placeholder.png" id="7_2fmhe"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6fju"]
 bg_color = Color(0.43, 0.43, 0.43, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgj8m"]
-size = Vector2(128, 128)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_662lt"]
+height = 104.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6h5vk"]
-bg_color = Color(0, 0, 0, 0.4117647)
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0, 0, 0, 0.4117647)
-border_blend = true
-corner_radius_bottom_right = 16
+bg_color = Color(0, 0, 0, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x87qo"]
-bg_color = Color(0, 0, 0, 0.627451)
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0, 0, 0, 0.4117647)
-border_blend = true
-corner_radius_bottom_right = 16
+bg_color = Color(0, 0, 0, 0.4117647)
 
 [node name="GameScene" type="Control" unique_id=2090212088]
 layout_mode = 3
@@ -63,28 +55,32 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Player" type="CharacterBody2D" parent="Battlefield/Objects" unique_id=1821175186]
-position = Vector2(200, 500)
+position = Vector2(50, 250)
 script = ExtResource("2_1ixah")
 
 [node name="Canvas" type="CanvasGroup" parent="Battlefield/Objects/Player" unique_id=1584502315]
 
 [node name="Sprite" type="Sprite2D" parent="Battlefield/Objects/Player/Canvas" unique_id=1435339467]
-texture = ExtResource("2_fiftr")
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_rgj8m")
 
 [node name="Collider" type="CollisionShape2D" parent="Battlefield/Objects/Player" unique_id=1432668304]
-shape = SubResource("RectangleShape2D_rgj8m")
+position = Vector2(23, -1)
+shape = SubResource("CapsuleShape2D_662lt")
 
 [node name="Opponent" type="StaticBody2D" parent="Battlefield/Objects" unique_id=969242786]
-position = Vector2(1720, 500)
+position = Vector2(750, 250)
 script = ExtResource("4_1ixah")
 
 [node name="Canvas" type="CanvasGroup" parent="Battlefield/Objects/Opponent" unique_id=947483694]
 
 [node name="Sprite" type="Sprite2D" parent="Battlefield/Objects/Opponent/Canvas" unique_id=1926471575]
-texture = ExtResource("2_fiftr")
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_2fmhe")
 
-[node name="Collider" type="CollisionShape2D" parent="Battlefield/Objects/Opponent" unique_id=644687924]
-shape = SubResource("RectangleShape2D_rgj8m")
+[node name="Collider" type="CollisionShape2D" parent="Battlefield/Objects/Opponent" unique_id=212331946]
+position = Vector2(-24, -1)
+shape = SubResource("CapsuleShape2D_662lt")
 
 [node name="UI" type="Control" parent="." unique_id=514686420]
 layout_mode = 1
@@ -95,25 +91,23 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_x87qo")
 
-[node name="QuitButton" type="Button" parent="UI" unique_id=671906643]
-layout_mode = 0
-offset_right = 64.0
-offset_bottom = 56.0
+[node name="TopBar" type="Panel" parent="UI" unique_id=352708261]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.05
+grow_horizontal = 2
+
+[node name="QuitButton" type="Button" parent="UI/TopBar" unique_id=671906643]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.973
+anchor_right = 1.0
+anchor_bottom = 1.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_6h5vk")
 theme_override_styles/hover = SubResource("StyleBoxFlat_x87qo")
 
-[node name="QuitButtonText" type="RichTextLabel" parent="UI/QuitButton" unique_id=1318031467]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-bbcode_enabled = true
-text = "[font_size=48]×[/font_size]"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Sprite" type="Sprite2D" parent="UI/TopBar/QuitButton" unique_id=126953900]
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("7_2fmhe")
+centered = false

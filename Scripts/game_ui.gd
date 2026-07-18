@@ -3,7 +3,7 @@ extends Control
 
 
 func _ready() -> void:
-	$QuitButton.pressed.connect(_on_quit_button_pressed)
+	$TopBar/QuitButton.pressed.connect(_on_quit_button_pressed)
 
 
 func _on_quit_button_pressed() -> void:

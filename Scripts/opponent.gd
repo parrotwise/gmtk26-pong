@@ -8,7 +8,7 @@ enum Direction {
 	DOWN,
 }
 
-const MARGIN: float = 64.0
+const MARGIN: float = 52.0
 
 var position_y_min: float:
 	get: return MARGIN
