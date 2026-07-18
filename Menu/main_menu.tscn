@@ -20,6 +20,7 @@ script = ExtResource("1_sla5p")
 
 [node name="Menu" type="Control" parent="." unique_id=785581321]
 unique_name_in_owner = true
+process_mode = 3
 custom_minimum_size = Vector2(800, 450)
 layout_mode = 3
 anchors_preset = 0
@@ -75,3 +76,16 @@ offset_bottom = 450.0
 grow_horizontal = 1
 grow_vertical = 1
 theme = ExtResource("2_dtkyu")
+
+[node name="VictoryOrDefeatContainer" type="CenterContainer" parent="." unique_id=146479022]
+process_mode = 3
+custom_minimum_size = Vector2(800, 450)
+offset_right = 800.0
+offset_bottom = 450.0
+mouse_filter = 2
+
+[node name="VictoryOrDefeatLabel" type="Label" parent="VictoryOrDefeatContainer" unique_id=1645331723]
+unique_name_in_owner = true
+layout_mode = 2
+label_settings = SubResource("LabelSettings_kafe6")
+horizontal_alignment = 1
