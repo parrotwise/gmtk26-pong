@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://djm2i4bbxb86c"]
+
+[ext_resource type="Script" uid="uid://csel3sxxejg3t" path="res://Scripts/game_ui.gd" id="1_x87qo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6fju"]
+bg_color = Color(0.43, 0.43, 0.43, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6h5vk"]
+bg_color = Color(0, 0, 0, 0.4117647)
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0.4117647)
+border_blend = true
+corner_radius_bottom_right = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x87qo"]
+bg_color = Color(0, 0, 0, 0.627451)
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0.4117647)
+border_blend = true
+corner_radius_bottom_right = 16
+
+[node name="GameScene" type="Control" unique_id=2090212088]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Battlefield" type="Control" parent="." unique_id=454438475]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Objects" type="Control" parent="Battlefield" unique_id=389179091]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Panel" parent="Battlefield" unique_id=136088733]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_b6fju")
+
+[node name="UI" type="Control" parent="." unique_id=514686420]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x87qo")
+
+[node name="QuitButton" type="Button" parent="UI" unique_id=671906643]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 56.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_6h5vk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_x87qo")
+
+[node name="QuitButtonText" type="RichTextLabel" parent="UI/QuitButton" unique_id=1318031467]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+bbcode_enabled = true
+text = "[font_size=48]×[/font_size]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
