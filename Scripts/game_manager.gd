@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Node
 
 
 const INITIAL_BALL_SPEED: float = 240.0

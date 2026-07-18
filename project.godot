@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Debug="*uid://dtu6x4vbmnofy"
 GameManager="*uid://jxfpimqr4msc"
 
 [display]
