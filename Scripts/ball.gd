@@ -2,6 +2,13 @@ class_name Ball
 extends Area2D
 
 
+enum Direction {
+	NONE,
+	UP,
+	DOWN,
+}
+
+
 signal bounce
 signal bounce_wall
 signal bounce_player
@@ -10,8 +17,10 @@ signal score
 signal score_player
 signal score_opponent
 
+
 @export var speed: float = 250
 @export var pct_speedup_per_bump: int = 2
+@export_range(0.0, 2.0, 0.1) var reflection_bias_strength: float = 1.0
 
 var position_x_min: float:
 	get: return 0
@@ -61,15 +70,69 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
+	var body_motion: Direction = Direction.NONE
+
 	if body is Player:
+		if body.velocity.y > 0:
+			body_motion = Direction.DOWN
+		elif body.velocity.y < 0:
+			body_motion = Direction.UP
+		
 		bounce.emit()
 		bounce_player.emit()
 	
 	elif body is Opponent:
+		body_motion = body.direction
+
 		bounce.emit()
 		bounce_opponent.emit()
 	
+	var reflection_bias: float = 0
+
+	# If the colliding body was moving DOWN, the reflection angle may be biased DOWN
+	if body_motion == Direction.DOWN:
+
+		# No bias applied if the ball bounced off of the UPPER half
+		if position.y <= body.position.y:
+			reflection_bias = 0
+		
+		# The LOWER half interpolates between no bias (collision at the center)
+		# and up to 45° DOWN (collision right at the LOWER tip of the collider)
+		else:
+			var alignment_center: float = body.position.y
+			var alignment_tip: float = body.position.y + body.collider.shape.height / 2
+			var alignment: float = clampf(position.y, alignment_center, alignment_tip)
+			var weight: float = (alignment - alignment_center) / (alignment_tip - alignment_center)
+
+			reflection_bias = lerpf(0, PI / 4, weight)
+	
+	# If the colliding body was moving UP, the reflection angle may be biased UP
+	elif body_motion == Direction.UP:
+
+		# No bias applied if the ball bounced off of the LOWER half
+		if position.y >= body.position.y:
+			reflection_bias = 0
+		
+		# The UPPER half interpolates between no bias (collision at the center)
+		# and up to 45° UP (collision right at the UPPER tip of the collider)
+		else:
+			var alignment_tip: float = body.position.y - body.collider.shape.height / 2
+			var alignment_center: float = body.position.y
+			var alignment: float = clampf(position.y, alignment_tip, alignment_center)
+			var weight: float = (alignment - alignment_tip) / (alignment_center - alignment_tip)
+			
+			reflection_bias = lerpf(-PI / 4, 0, weight)
+	
+	# Reflect the angle of incidence against the normal before applying the bias
 	direction = PI - direction
+	
+	# The bias will be reversed for the Opponent because reflected angles
+	# facing LEFT and RIGHT must curl opposite ways to approach DOWN/UP
+	direction += reflection_bias * (1 if body is Player else -1) * reflection_bias_strength
+
+	# ↑↑ Possible issue: The bias could push the angle of reflection behind the tangent line
+	# if the angle of incidence was already very acute — ignoring for now as improbable
+	
 	speed *= 1 + pct_speedup_per_bump / 100.0
 
 
