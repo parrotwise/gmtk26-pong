@@ -8,15 +8,18 @@ enum Direction {
 	DOWN,
 }
 
-const MARGIN: float = 52.0
 
 var position_y_min: float:
-	get: return MARGIN
+	get: return $Collider.shape.height / 2
 var position_y_max: float:
-	get: return DisplayServer.window_get_size().y - MARGIN
+	get: return DisplayServer.window_get_size().y - $Collider.shape.height / 2
+
+
+@export var speed: float = 200
 
 var direction: Direction
 var velocity: float
+
 
 func _ready() -> void:
 	direction = Direction.DOWN
@@ -25,9 +28,9 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if direction == Direction.UP:
-		velocity = -GameManager.opponent_speed * delta
+		velocity = -speed * delta
 	elif direction == Direction.DOWN:
-		velocity = GameManager.opponent_speed * delta
+		velocity = speed * delta
 
 	position.y += velocity
 
