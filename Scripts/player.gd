@@ -13,10 +13,10 @@ func _physics_process(_delta: float) -> void:
 	var move_up: int = 1 if up_pressed else 0
 	var move_down: int = 1 if down_pressed else 0
 	
-	self.velocity.x = GameManager.player_speed * (move_right - move_left)
-	self.velocity.y = GameManager.player_speed * (move_down - move_up)
+	velocity.x = GameManager.player_speed * (move_right - move_left)
+	velocity.y = GameManager.player_speed * (move_down - move_up)
 
 	move_and_slide()
 
-	self.position.x = clamp(self.position.x, 0, DisplayServer.window_get_size().x)
-	self.position.y = clamp(self.position.y, 0, DisplayServer.window_get_size().y)
+	position.x = clamp(position.x, 0, DisplayServer.window_get_size().x)
+	position.y = clamp(position.y, 0, DisplayServer.window_get_size().y)
