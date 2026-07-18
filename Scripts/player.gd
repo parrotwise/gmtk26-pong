@@ -23,4 +23,4 @@ func _physics_process(_delta: float) -> void:
 	
 	
 
-	position.y = clamp(position.y, 0, GameManager.hud.bar.size)
+	position.y = clamp(position.y, 0, get_viewport().size.y)
