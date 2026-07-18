@@ -13,4 +13,4 @@ func _physics_process(_delta: float) -> void:
 
 	move_and_slide()
 
-	position.y = clamp(position.y, 0, DisplayServer.window_get_size().y)
+	position.y = clamp(position.y, 0, get_viewport().size.y)

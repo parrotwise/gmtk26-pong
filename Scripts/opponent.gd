@@ -12,7 +12,7 @@ enum Direction {
 var position_y_min: float:
 	get: return $Collider.shape.height / 2
 var position_y_max: float:
-	get: return DisplayServer.window_get_size().y - $Collider.shape.height / 2
+	get: return get_viewport().size.y - $Collider.shape.height / 2
 
 
 @export var speed: float = 200
