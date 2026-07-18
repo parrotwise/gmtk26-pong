@@ -14,6 +14,9 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6fju"]
 bg_color = Color(0.43, 0.43, 0.43, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1vivr"]
+bg_color = Color(0, 0, 0, 1)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_662lt"]
 height = 104.0
 
@@ -44,6 +47,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_b6fju")
+
+[node name="Divider" type="Panel" parent="Background" unique_id=1106763310]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.0
+offset_top = 22.0
+offset_right = 1.0
+offset_bottom = 450.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1vivr")
 
 [node name="Battlefield" type="Control" parent="." unique_id=454438475]
 layout_mode = 1
