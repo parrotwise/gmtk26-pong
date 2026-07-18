@@ -22,6 +22,11 @@ signal score_opponent
 @export var pct_speedup_per_bump: int = 2
 @export_range(0.0, 2.0, 0.1) var reflection_bias_strength: float = 1.0
 
+# 180° = reflection direction can be asymptotically vertical
+# 170° = reflection direction can be no less than 5° off the vertical
+# 0° = reflection directions have no verticality - strictly horizontal
+@export_range(120.0, 180.0, 1.0) var valid_reflection_arc_degrees: float = 164.0
+
 var position_x_min: float:
 	get: return 0
 var position_x_max: float:
@@ -130,9 +135,30 @@ func _on_body_entered(body: Node2D) -> void:
 	# facing LEFT and RIGHT must curl opposite ways to approach DOWN/UP
 	direction += reflection_bias * (1 if body is Player else -1) * reflection_bias_strength
 
-	# ↑↑ Possible issue: The bias could push the angle of reflection behind the tangent line
-	# if the angle of incidence was already very acute — ignoring for now as improbable
-	
+	# The calculated angle of reflection is clamped to avoid near-vertical directions
+	var valid_reflection_arc_radians: float = deg_to_rad(valid_reflection_arc_degrees)
+
+	# The quadrant of the angle is determined, as well as a measure of verticality ∈ [0, π]
+	var direction_normalized: float = fmod(direction + 2 * PI, 2 * PI)
+	var quadrant: int = (
+		1 if direction_normalized < (PI / 2) else
+		2 if direction_normalized < PI else
+		3 if (direction_normalized < PI * 3/2) else
+		4
+	)
+	var direction_verticality = (
+		direction_normalized if quadrant == 1 else
+		(direction_normalized - PI) if quadrant <= 3 else
+		(direction_normalized - 2 * PI)
+	)
+
+	# If this verticality measure falls outside the valid arc, the delta is used as a correction term
+	var direction_verticality_max: float = valid_reflection_arc_radians
+	var direction_verticality_min: float = -valid_reflection_arc_radians
+	var correction: float = clampf(direction_verticality, direction_verticality_min, direction_verticality_max) - direction_verticality
+
+	direction += correction
+
 	speed *= 1 + pct_speedup_per_bump / 100.0
 
 
