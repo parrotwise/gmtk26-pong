@@ -21,14 +21,18 @@ func _ready() -> void:
 	quit_button.pressed.connect(_on_quit)
 	# TODO: Listen for score change
 	# some_signal.connect(_update_hearts)
+	# ↑ EDIT Parrot: The GameScene listens for scores,
+	# tells the losing side to take damage, then
+	# they do so and tell the HUD to update
 	_update_hearts()
 
 
 # Set the hearts UI
 func _update_hearts() -> void:
 	# TODO: Get the score from somewhere
-	var hp_left: int = randi_range(0, 3)
-	var hp_right: int = randi_range(0, 3)
+	# ↑ EDIT Parrot: Asking the score-havers directly
+	var hp_left: int = GameManager.player.health
+	var hp_right: int = GameManager.opponent.health
 	
 	# Change left heart textures
 	for idx in left_hearts.get_child_count():

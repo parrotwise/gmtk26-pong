@@ -9,6 +9,9 @@ enum Direction {
 }
 
 
+signal no_health
+
+
 var collider: CollisionShape2D:
 	get: return $Collider
 var top_limit: float:
@@ -16,14 +19,15 @@ var top_limit: float:
 var bottom_limit: float:
 	get: return get_viewport().size.y - ($Collider.shape.height / 2)
 
-
 @export var speed: float = 200
 
+var health: int
 var direction: Direction
 var velocity: float
 
 
 func _ready() -> void:
+	health = 3
 	direction = Direction.DOWN
 	velocity = 0
 
@@ -44,3 +48,12 @@ func _physics_process(delta: float) -> void:
 		direction = Direction.DOWN
 
 	position.y = clamp(position.y, top_limit, bottom_limit)
+
+
+func lose_health() -> void:
+	health -= 1
+	
+	GameManager.hud._update_hearts()
+
+	if health == 0:
+		no_health.emit()

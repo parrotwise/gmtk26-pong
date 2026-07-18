@@ -1,6 +1,10 @@
 class_name Player
 extends CharacterBody2D
 
+
+signal no_health
+
+
 @export var speed: float = 150
 
 var collider: CollisionShape2D:
@@ -10,8 +14,14 @@ var top_limit: float:
 var bottom_limit: float:
 	get: return get_viewport().size.y - ($Collider.shape.height / 2)
 
+var health: int
+
+
 func _ready() -> void:
+	health = 3
+
 	GameManager.player = self
+
 
 func _physics_process(_delta: float) -> void:
 	var move_up: int = 1 if Input.is_action_pressed('ui_up') else 0
@@ -21,3 +31,12 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	
 	position.y = clamp(position.y, top_limit, bottom_limit)
+
+
+func lose_health() -> void:
+	health -= 1
+	
+	GameManager.hud._update_hearts()
+
+	if health == 0:
+		no_health.emit()
