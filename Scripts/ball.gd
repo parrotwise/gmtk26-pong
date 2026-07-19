@@ -39,6 +39,7 @@ var collider_radius: float:
 	get: return $Collider.shape.radius
 
 var direction: float # in radians
+var angular_speed: float # in rad/s
 
 
 func _ready() -> void:
@@ -51,12 +52,14 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	position += Vector2(cos(direction), sin(direction)) * speed * delta
+	rotation += angular_speed * delta
 
 	var collision_top: bool = (position.y - collider_radius) <= position_y_min
 	var collision_bottom: bool = (position.y + collider_radius) >= position_y_max
 
 	if collision_top or collision_bottom:
 		position = Vector2(position.x, clampf(position.y, position_y_min, position_y_max))
+		angular_speed -= 4*PI - 4*direction
 		direction = 2*PI - direction
 		bounce_wall.emit()
 	
@@ -76,6 +79,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	var body_motion: Direction = Direction.NONE
+	var initial_angle: float = direction
 
 	if body is Player:
 		if body.velocity.y > 0:
@@ -161,11 +165,15 @@ func _on_body_entered(body: Node2D) -> void:
 
 	speed *= 1 + pct_speedup_per_bump / 100.0
 
+	var angle_delta: float = direction - initial_angle
+	angular_speed -= 2 * angle_delta
+
 
 func reset() -> void:
 	$ParticleAnchor/Particles.emitting = true
 	position = get_viewport_rect().size / 2
 	direction = RandUtil.randfloat(PI * 3/4, PI * 5/4)
+	angular_speed = RandUtil.randfloat(PI, 2 * PI)
 	set_physics_process(true)
 
 
