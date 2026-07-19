@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://ke4slfpx5tjp" path="res://Scenes/game_scene.gd" id="1_5dgvu"]
 [ext_resource type="Script" uid="uid://ejpyehyvfe3j" path="res://Scripts/battlefield.gd" id="1_6h5vk"]
 [ext_resource type="Script" uid="uid://x2chsq18dd8c" path="res://Scripts/player.gd" id="2_1ixah"]
-[ext_resource type="Texture2D" uid="uid://btx6gaxkkwepl" path="res://Sprites/p1_placeholder.png" id="3_rgj8m"]
 [ext_resource type="Script" uid="uid://dowrysm7015b3" path="res://Scripts/opponent.gd" id="4_1ixah"]
-[ext_resource type="Texture2D" uid="uid://ce2ugutng78r4" path="res://Sprites/p2_placeholder.png" id="5_2fmhe"]
+[ext_resource type="Texture2D" uid="uid://78t4kpwyd0pd" path="res://Sprites/p1.png" id="4_ikfsv"]
+[ext_resource type="Texture2D" uid="uid://d4jsgjfjen0u7" path="res://Sprites/p2.png" id="6_5dgvu"]
 [ext_resource type="Script" uid="uid://ca58xn8hkrbfg" path="res://Scripts/ball.gd" id="6_7iton"]
 [ext_resource type="Texture2D" uid="uid://p5kbp4wbgfep" path="res://Sprites/ball_placeholder.png" id="7_ikfsv"]
 [ext_resource type="PackedScene" uid="uid://i1o5fru2q5cg" path="res://Scenes/GameUI/hud.tscn" id="9_ikfsv"]
@@ -78,7 +78,7 @@ script = ExtResource("2_1ixah")
 
 [node name="Sprite" type="Sprite2D" parent="Battlefield/Objects/Player/Canvas" unique_id=1435339467]
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("3_rgj8m")
+texture = ExtResource("4_ikfsv")
 
 [node name="Collider" type="CollisionShape2D" parent="Battlefield/Objects/Player" unique_id=1432668304]
 position = Vector2(16, 0)
@@ -92,7 +92,7 @@ script = ExtResource("4_1ixah")
 
 [node name="Sprite" type="Sprite2D" parent="Battlefield/Objects/Opponent/Canvas" unique_id=1926471575]
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("5_2fmhe")
+texture = ExtResource("6_5dgvu")
 
 [node name="Collider" type="CollisionShape2D" parent="Battlefield/Objects/Opponent" unique_id=441312096]
 position = Vector2(-16, 0)
