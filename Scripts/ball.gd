@@ -64,12 +64,12 @@ func _physics_process(delta: float) -> void:
 	var collision_right: bool = (position.x - collider_radius) >= position_x_max
 	
 	if collision_left:
-		set_physics_process(false)
+		disable()
 		score.emit()
 		score_opponent.emit()
 	
 	elif collision_right:
-		set_physics_process(false)
+		disable()
 		score.emit()
 		score_player.emit()
 
@@ -163,6 +163,13 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func reset() -> void:
+	$ParticleAnchor/Particles.emitting = true
 	position = get_viewport_rect().size / 2
 	direction = RandUtil.randfloat(PI * 3/4, PI * 5/4)
 	set_physics_process(true)
+
+
+func disable() -> void:
+	$ParticleAnchor/Particles.emitting = false
+	position = -get_viewport_rect().size
+	set_physics_process(false)

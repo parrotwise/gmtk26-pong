@@ -12,7 +12,13 @@
 [ext_resource type="Script" uid="uid://ca58xn8hkrbfg" path="res://Scripts/ball.gd" id="6_7iton"]
 [ext_resource type="Texture2D" uid="uid://cx6fv01ihp8xc" path="res://Sprites/ball.png" id="9_5dgvu"]
 [ext_resource type="PackedScene" uid="uid://i1o5fru2q5cg" path="res://Scenes/GameUI/hud.tscn" id="9_ikfsv"]
-[ext_resource type="Texture2D" uid="uid://bnykdedso0l1l" path="res://Sprites/glow_placeholder.png" id="9_uscyt"]
+[ext_resource type="Texture2D" uid="uid://cicujh0r8dsq8" path="res://Sprites/glow.png" id="9_uscyt"]
+[ext_resource type="Texture2D" uid="uid://b2n63erd2fqti" path="res://Sprites/sparkle_1.png" id="13_np3vi"]
+[ext_resource type="Texture2D" uid="uid://cc5f7nxsu3to0" path="res://Sprites/sparkle_2.png" id="14_mipjh"]
+[ext_resource type="Texture2D" uid="uid://bs8fauqv00ca3" path="res://Sprites/sparkle_3.png" id="15_aq00n"]
+[ext_resource type="Texture2D" uid="uid://bed22mjfdjq4u" path="res://Sprites/sparkle_4.png" id="16_817jg"]
+[ext_resource type="Texture2D" uid="uid://ogaxqywmyl35" path="res://Sprites/sparkle_5.png" id="17_vtwju"]
+[ext_resource type="Texture2D" uid="uid://cjyn46k3p1ifm" path="res://Sprites/sparkle_6.png" id="18_fnr0w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6fju"]
 bg_color = Color(0.43, 0.43, 0.43, 1)
@@ -27,11 +33,26 @@ colors = PackedColorArray(0, 0, 0, 0.42745098, 0, 0, 0, 0)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_662lt"]
 height = 106.0
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bybji"]
-blend_mode = 1
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_ikfsv"]
 radius = 10.5
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_11l1m"]
+frames = 6
+speed_scale = 10.0
+frame_0/texture = ExtResource("13_np3vi")
+frame_1/texture = ExtResource("14_mipjh")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("15_aq00n")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("16_817jg")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("17_vtwju")
+frame_4/duration = 1.0
+frame_5/texture = ExtResource("18_fnr0w")
+frame_5/duration = 1.0
+
+[sub_resource type="Gradient" id="Gradient_11l1m"]
+colors = PackedColorArray(0.64, 0.44799998, 0, 1, 1, 1, 1, 1)
 
 [node name="GameScene" type="Control" unique_id=2090212088]
 custom_minimum_size = Vector2(800, 450)
@@ -138,9 +159,9 @@ shape = SubResource("CapsuleShape2D_662lt")
 position = Vector2(400, 250)
 script = ExtResource("6_7iton")
 
-[node name="Glow" type="Sprite2D" parent="Battlefield/Objects/Ball" unique_id=1908385453]
-self_modulate = Color(1, 1, 1, 0.5019608)
-material = SubResource("CanvasItemMaterial_bybji")
+[node name="Glow" type="Marker2D" parent="Battlefield/Objects/Ball" unique_id=282295206]
+
+[node name="Sprite" type="Sprite2D" parent="Battlefield/Objects/Ball/Glow" unique_id=1908385453]
 scale = Vector2(0.33, 0.33)
 texture = ExtResource("9_uscyt")
 
@@ -151,6 +172,29 @@ offset = Vector2(22.455, 0)
 
 [node name="Collider" type="CollisionShape2D" parent="Battlefield/Objects/Ball" unique_id=928447187]
 shape = SubResource("CircleShape2D_ikfsv")
+
+[node name="ParticleAnchor" type="Marker2D" parent="Battlefield/Objects/Ball" unique_id=1620547873]
+position = Vector2(12.895, 8.415)
+
+[node name="Particles" type="CPUParticles2D" parent="Battlefield/Objects/Ball/ParticleAnchor" unique_id=2130462628]
+amount = 4
+texture = SubResource("AnimatedTexture_11l1m")
+lifetime = 0.6
+preprocess = 0.6
+speed_scale = 2.0
+emission_shape = 1
+emission_sphere_radius = 8.0
+particle_flag_align_y = true
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+radial_accel_min = 120.0
+radial_accel_max = 200.0
+scale_amount_min = 0.4
+scale_amount_max = 0.6
+color_ramp = SubResource("Gradient_11l1m")
 
 [node name="HUD" parent="." unique_id=1368634265 instance=ExtResource("9_ikfsv")]
 layout_mode = 1
