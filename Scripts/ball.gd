@@ -153,8 +153,8 @@ func _on_body_entered(body: Node2D) -> void:
 	)
 
 	# If this verticality measure falls outside the valid arc, the delta is used as a correction term
-	var direction_verticality_max: float = valid_reflection_arc_radians
-	var direction_verticality_min: float = -valid_reflection_arc_radians
+	var direction_verticality_max: float = valid_reflection_arc_radians / 2
+	var direction_verticality_min: float = -valid_reflection_arc_radians / 2
 	var correction: float = clampf(direction_verticality, direction_verticality_min, direction_verticality_max) - direction_verticality
 
 	direction += correction
