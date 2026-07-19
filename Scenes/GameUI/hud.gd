@@ -24,28 +24,23 @@ func _ready() -> void:
 	# ↑ EDIT Parrot: The GameScene listens for scores,
 	# tells the losing side to take damage, then
 	# they do so and tell the HUD to update
-	_update_hearts()
 
 
 # Set the hearts UI
-func _update_hearts() -> void:
-	# TODO: Get the score from somewhere
-	# ↑ EDIT Parrot: Asking the score-havers directly
-	var hp_left: int = GameManager.player.health
-	var hp_right: int = GameManager.opponent.health
-	
+func _on_player_health_change(new_health : int):
 	# Change left heart textures
 	for idx in left_hearts.get_child_count():
 		var heart: TextureRect = left_hearts.get_child(idx)
-		if idx < hp_left:
+		if idx < new_health:
 			heart.texture = heart_full_texture
 		else: 
 			heart.texture = heart_empty_texture
 	
+func _on_opponent_health_changed(new_health : int) -> void:
 	# Change right heart textures
 	for idx in right_hearts.get_child_count():
 		var heart: TextureRect = right_hearts.get_child(idx)
-		if idx < hp_right:
+		if idx < new_health:
 			heart.texture = heart_full_texture
 		else: 
 			heart.texture = heart_empty_texture

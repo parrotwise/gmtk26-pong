@@ -1,9 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
-
 signal no_health
-
+signal health_changed(new_health : int)
 
 @export var speed: float = 150
 
@@ -16,10 +15,8 @@ var bottom_limit: float:
 
 var health: int
 
-
 func _ready() -> void:
-	health = 3
-
+	reset()
 	GameManager.player = self
 
 
@@ -36,7 +33,10 @@ func _physics_process(_delta: float) -> void:
 func lose_health() -> void:
 	health -= 1
 	
-	GameManager.hud._update_hearts()
+	health_changed.emit(health)
 
 	if health == 0:
 		no_health.emit()
+		
+func reset() -> void:
+	health = 3

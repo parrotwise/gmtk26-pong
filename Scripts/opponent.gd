@@ -1,14 +1,13 @@
 class_name Opponent
 extends StaticBody2D
 
-
 enum Direction {
 	NONE,
 	UP,
 	DOWN,
 }
 
-
+signal health_changed(new_health: int)
 signal no_health
 
 
@@ -27,10 +26,7 @@ var velocity: float
 
 
 func _ready() -> void:
-	health = 3
-	direction = Direction.DOWN
-	velocity = 0
-
+	reset()
 	GameManager.opponent = self
 
 
@@ -53,7 +49,12 @@ func _physics_process(delta: float) -> void:
 func lose_health() -> void:
 	health -= 1
 	
-	GameManager.hud._update_hearts()
+	health_changed.emit(health)
 
 	if health == 0:
 		no_health.emit()
+
+func reset():
+	health = 3
+	direction = Direction.DOWN
+	velocity = 0
