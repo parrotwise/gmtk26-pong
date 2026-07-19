@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ke4slfpx5tjp" path="res://Scenes/game_scene.gd" id="1_5dgvu"]
 [ext_resource type="Script" uid="uid://ejpyehyvfe3j" path="res://Scripts/battlefield.gd" id="1_6h5vk"]
 [ext_resource type="Script" uid="uid://x2chsq18dd8c" path="res://Scripts/player.gd" id="2_1ixah"]
+[ext_resource type="Texture2D" uid="uid://dyl0hv0unlg5" path="res://Sprites/bg.png" id="2_5dgvu"]
 [ext_resource type="Script" uid="uid://dowrysm7015b3" path="res://Scripts/opponent.gd" id="4_1ixah"]
 [ext_resource type="Texture2D" uid="uid://78t4kpwyd0pd" path="res://Sprites/p1.png" id="4_ikfsv"]
 [ext_resource type="Texture2D" uid="uid://d4jsgjfjen0u7" path="res://Sprites/p2.png" id="6_5dgvu"]
@@ -41,7 +42,18 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_b6fju")
 
+[node name="Texture" type="TextureRect" parent="Background" unique_id=12330466]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5dgvu")
+expand_mode = 2
+
 [node name="Divider" type="Panel" parent="Background" unique_id=1106763310]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5

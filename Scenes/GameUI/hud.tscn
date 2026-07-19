@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bg2lsv0wic75u" path="res://Scenes/GameUI/hud.gd" id="1_56xkn"]
 [ext_resource type="Texture2D" uid="uid://su2se2y7g5xr" path="res://Sprites/hp.png" id="2_eccdw"]
-[ext_resource type="Texture2D" uid="uid://brsr08lgwm5ak" path="res://Sprites/bar_placeholder.png" id="2_l26h0"]
 [ext_resource type="Texture2D" uid="uid://bask7m4bnnhxh" path="res://Sprites/hp_no.png" id="3_0un6g"]
-[ext_resource type="Texture2D" uid="uid://b7jpgpuws8ief" path="res://Sprites/exit_placeholder.png" id="3_eccdw"]
+[ext_resource type="Texture2D" uid="uid://dh5wukrh38lcn" path="res://Sprites/bar.png" id="4_l26h0"]
+[ext_resource type="Texture2D" uid="uid://dfxvusa3pspuj" path="res://Sprites/exit.png" id="5_eccdw"]
 
 [node name="HUD" type="Control" unique_id=1368634265]
 custom_minimum_size = Vector2(800, 40)
@@ -22,7 +22,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 40.0
 grow_horizontal = 2
-texture = ExtResource("2_l26h0")
+texture = ExtResource("4_l26h0")
 expand_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1349159520]
@@ -94,6 +94,6 @@ anchor_right = 1.0
 offset_left = -40.0
 offset_bottom = 40.0
 grow_horizontal = 0
-texture_normal = ExtResource("3_eccdw")
+texture_normal = ExtResource("5_eccdw")
 ignore_texture_size = true
 stretch_mode = 0

@@ -3,7 +3,11 @@
 [ext_resource type="Script" uid="uid://cm6wy2um2uj00" path="res://Menu/main_menu.gd" id="1_sla5p"]
 [ext_resource type="PackedScene" uid="uid://djm2i4bbxb86c" path="res://Scenes/game_scene.tscn" id="2_ci1se"]
 [ext_resource type="Theme" uid="uid://cmohlg8ancb1r" path="res://Assets/Theme/the_theme.tres" id="2_dtkyu"]
+[ext_resource type="Texture2D" uid="uid://dyl0hv0unlg5" path="res://Sprites/bg.png" id="3_fw3rq"]
 [ext_resource type="FontFile" uid="uid://q86l2pnsdds1" path="res://Assets/Font/MetalMania-Regular.ttf" id="3_ohgnh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_11l1m"]
+bg_color = Color(0.21176471, 0.19215687, 0.14509805, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_kafe6"]
 font = ExtResource("3_ohgnh")
@@ -28,6 +32,26 @@ custom_minimum_size = Vector2(800, 450)
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("2_dtkyu")
+
+[node name="Background" type="Panel" parent="Menu" unique_id=1874881670]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_11l1m")
+
+[node name="Texture" type="TextureRect" parent="Menu/Background" unique_id=1097396287]
+modulate = Color(1, 1, 1, 0.09411765)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_fw3rq")
+expand_mode = 2
 
 [node name="CenterContainer2" type="CenterContainer" parent="Menu" unique_id=1307644251]
 custom_minimum_size = Vector2(0, 450)
