@@ -120,8 +120,8 @@ func _on_body_entered(body: Node2D) -> void:
 			var alignment_center: float = body.position.y
 			var alignment_tip: float = body.position.y + body.collider.shape.height / 2
 			var alignment: float = clampf(position.y, alignment_center, alignment_tip)
-			var weight: float = (alignment - alignment_center) / (alignment_tip - alignment_center)
-
+			var weight: float = inverse_lerp(alignment_center, alignment_tip, alignment)
+			# (alignment - alignment_center) / (alignment_tip - alignment_center)
 			reflection_bias = lerpf(0, PI / 4, weight)
 	
 	# If the colliding body was moving UP, the reflection angle may be biased UP
@@ -137,7 +137,8 @@ func _on_body_entered(body: Node2D) -> void:
 			var alignment_tip: float = body.position.y - body.collider.shape.height / 2
 			var alignment_center: float = body.position.y
 			var alignment: float = clampf(position.y, alignment_tip, alignment_center)
-			var weight: float = (alignment - alignment_tip) / (alignment_center - alignment_tip)
+			var weight: float = inverse_lerp(alignment_tip, alignment_center, alignment)
+			# (alignment - alignment_tip) / (alignment_center - alignment_tip)
 			
 			reflection_bias = lerpf(-PI / 4, 0, weight)
 	
@@ -147,33 +148,50 @@ func _on_body_entered(body: Node2D) -> void:
 	# The bias will be reversed for the Opponent because reflected angles
 	# facing LEFT and RIGHT must curl opposite ways to approach DOWN/UP
 	direction += reflection_bias * (1 if body is Player else -1) * reflection_bias_strength
-
-	# The calculated angle of reflection is clamped to avoid near-vertical directions
-	var valid_reflection_arc_radians: float = deg_to_rad(valid_reflection_arc_degrees)
-
-	# The quadrant of the angle is determined, as well as a measure of verticality ∈ [0, π]
-	var direction_normalized: float = fmod(direction + 2 * PI, 2 * PI)
-	var quadrant: int = (
-		1 if direction_normalized < (PI / 2) else
-		2 if direction_normalized < PI else
-		3 if (direction_normalized < PI * 3/2) else
-		4
-	)
-	var direction_verticality = (
-		direction_normalized if quadrant == 1 else
-		(direction_normalized - PI) if quadrant <= 3 else
-		(direction_normalized - 2 * PI)
-	)
-
-	# If this verticality measure falls outside the valid arc, the delta is used as a correction term
-	var direction_verticality_max: float = valid_reflection_arc_radians / 2
-	var direction_verticality_min: float = -valid_reflection_arc_radians / 2
-	var correction: float = clampf(direction_verticality, direction_verticality_min, direction_verticality_max) - direction_verticality
-
-	direction += correction
-
+	
+	#
+	# New idea on how to bound the maximum angle.
+	#
+	
+	# We want |x/y| >= lambda, in other words |x| >= lambda * |y|
+	var lambda = atan(deg_to_rad(valid_reflection_arc_degrees))
+	
+	# Get the current direction vector 
+	var v: Vector2 = Vector2(1.0, 0.0).rotated(direction)
+	
+	# Update x so that |x| >= lambda * |y| without changing the sign of x.
+	v.x = sign(v.x) * max(abs(v.x), lambda * abs(v.y))
+	
+	# Get the direction!
+	direction = v.angle()
+	
+	if false:
+		# The calculated angle of reflection is clamped to avoid near-vertical directions
+		var valid_reflection_arc_radians: float = deg_to_rad(valid_reflection_arc_degrees)
+		
+		# The quadrant of the angle is determined, as well as a measure of verticality ∈ [0, π]
+		var direction_normalized: float = fmod(direction + 2 * PI, 2 * PI)
+		var quadrant: int = (
+			1 if direction_normalized < (PI / 2) else
+			2 if direction_normalized < PI else
+			3 if (direction_normalized < PI * 3/2) else
+			4
+		)
+		var direction_verticality = (
+			direction_normalized if quadrant == 1 else
+			(direction_normalized - PI) if quadrant <= 3 else
+			(direction_normalized - 2 * PI)
+		)
+		
+		# If this verticality measure falls outside the valid arc, the delta is used as a correction term
+		var direction_verticality_max: float = valid_reflection_arc_radians / 2
+		var direction_verticality_min: float = -valid_reflection_arc_radians / 2
+		var correction: float = clampf(direction_verticality, direction_verticality_min, direction_verticality_max) - direction_verticality
+		
+		direction += correction
+	
 	intensity *= 1 + pct_speedup_per_bump / 100.0
-
+	
 	var angle_delta: float = direction - initial_angle
 	angular_speed -= 2 * angle_delta
 
