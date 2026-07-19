@@ -14,7 +14,7 @@ var bar: TextureRect:
 
 # Initialization
 func _ready() -> void:
-	# TODO: Register
+	# Register
 	GameManager.hud = self
 	
 	# Signals
@@ -25,6 +25,15 @@ func _ready() -> void:
 	# tells the losing side to take damage, then
 	# they do so and tell the HUD to update
 
+# Reset the HUD
+func reset():
+	# Change left heart textures
+	for heart in left_hearts.get_children():
+		(heart as TextureRect).texture = heart_full_texture
+	
+	# Change right heart textures
+	for heart in right_hearts.get_children():
+		(heart as TextureRect).texture = heart_full_texture
 
 # Set the hearts UI
 func _on_player_health_change(new_health : int):

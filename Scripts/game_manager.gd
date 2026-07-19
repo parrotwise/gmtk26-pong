@@ -11,6 +11,7 @@ func reset() -> void:
 	player.reset()
 	opponent.reset()
 	ball.reset()
+	hud.reset()
 	
 func _on_win_game() -> void:
 	Debug.info('And there was much rejoicing.')
