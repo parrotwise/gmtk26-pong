@@ -4,7 +4,9 @@
 [ext_resource type="Script" uid="uid://ejpyehyvfe3j" path="res://Scripts/battlefield.gd" id="1_6h5vk"]
 [ext_resource type="Script" uid="uid://x2chsq18dd8c" path="res://Scripts/player.gd" id="2_1ixah"]
 [ext_resource type="Texture2D" uid="uid://dyl0hv0unlg5" path="res://Sprites/bg.png" id="2_5dgvu"]
+[ext_resource type="Texture2D" uid="uid://c26rvse43bqgf" path="res://Assets/Font/chinese_text.png" id="3_uscyt"]
 [ext_resource type="Script" uid="uid://dowrysm7015b3" path="res://Scripts/opponent.gd" id="4_1ixah"]
+[ext_resource type="Script" uid="uid://ck7ohv1t167os" path="res://Scripts/cool_text.gd" id="4_4xiap"]
 [ext_resource type="Texture2D" uid="uid://78t4kpwyd0pd" path="res://Sprites/p1.png" id="4_ikfsv"]
 [ext_resource type="Texture2D" uid="uid://d4jsgjfjen0u7" path="res://Sprites/p2.png" id="6_5dgvu"]
 [ext_resource type="Script" uid="uid://ca58xn8hkrbfg" path="res://Scripts/ball.gd" id="6_7iton"]
@@ -16,6 +18,10 @@ bg_color = Color(0.43, 0.43, 0.43, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1vivr"]
 bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_kafe6"]
+offsets = PackedFloat32Array(0, 0.9983923)
+colors = PackedColorArray(0, 0, 0, 0.42745098, 0, 0, 0, 0)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_662lt"]
 height = 106.0
@@ -64,6 +70,24 @@ offset_right = 1.0
 offset_bottom = 450.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_1vivr")
+
+[node name="CenterContainer" type="CenterContainer" parent="Background" unique_id=594762208]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CoolText" type="TextureRect" parent="Background/CenterContainer" unique_id=1716668884]
+modulate = Color(0.45490196, 0.45490196, 0.45490196, 0.22745098)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(-35, 0)
+texture = ExtResource("3_uscyt")
+script = ExtResource("4_4xiap")
+gradient = SubResource("Gradient_kafe6")
 
 [node name="Battlefield" type="Control" parent="." unique_id=454438475]
 layout_mode = 1
