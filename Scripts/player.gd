@@ -11,7 +11,7 @@ var collider: CollisionShape2D:
 var top_limit: float:
 	get: return GameManager.hud.bar.size.y + $Collider.shape.height / 2
 var bottom_limit: float:
-	get: return get_viewport().size.y - ($Collider.shape.height / 2)
+	get: return get_viewport_rect().size.y - ($Collider.shape.height / 2)
 
 var health: int
 

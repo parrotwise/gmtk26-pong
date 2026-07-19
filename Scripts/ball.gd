@@ -30,11 +30,11 @@ signal score_opponent
 var position_x_min: float:
 	get: return 0
 var position_x_max: float:
-	get: return get_viewport().size.x
+	get: return get_viewport_rect().size.x
 var position_y_min: float:
 	get: return GameManager.hud.bar.size.y
 var position_y_max: float:
-	get: return get_viewport().size.y
+	get: return get_viewport_rect().size.y
 var collider_radius: float:
 	get: return $Collider.shape.radius
 
@@ -163,6 +163,6 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func reset() -> void:
-	position = get_viewport().size / 2
+	position = get_viewport_rect().size / 2
 	direction = RandUtil.randfloat(PI * 3/4, PI * 5/4)
 	set_physics_process(true)
