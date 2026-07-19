@@ -13,3 +13,5 @@ func _ready() -> void:
 
 	GameManager.ball.bounce.connect(AudioManager.play.bind(AudioManager.sfx_bounce))
 	GameManager.ball.score.connect(AudioManager.play.bind(AudioManager.sfx_score))
+
+	AudioManager.start_music()
