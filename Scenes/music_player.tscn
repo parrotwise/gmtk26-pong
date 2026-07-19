@@ -51,4 +51,5 @@ Vector2i(2, 2): {
 }
 
 [node name="MusicPlayer" type="AudioStreamPlayer" unique_id=1718395026]
+process_mode = 3
 stream = SubResource("AudioStreamInteractive_11l1m")

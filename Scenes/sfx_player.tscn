@@ -13,5 +13,6 @@ clip_1/stream = ExtResource("2_5bcp7")
 clip_1/auto_advance = 0
 
 [node name="SFXPlayer" type="AudioStreamPlayer" unique_id=1718395026]
+process_mode = 3
 stream = SubResource("AudioStreamInteractive_cy1if")
 max_polyphony = 2
