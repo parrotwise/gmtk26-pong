@@ -1,15 +1,23 @@
 [gd_scene format=3 uid="uid://be04l1ahxr0pg"]
 
-[ext_resource type="AudioStream" uid="uid://c3vlsgmvsq6kb" path="res://Audio/bounce_placeholder.wav" id="1_u8eqc"]
-[ext_resource type="AudioStream" uid="uid://cembbrry5hh2r" path="res://Audio/score_placeholder.wav" id="2_5bcp7"]
+[ext_resource type="AudioStream" uid="uid://ceflxxm2yuoba" path="res://Audio/bounce_sfx.wav" id="1_1kq3q"]
+[ext_resource type="AudioStream" uid="uid://cip7p2oqpkyf7" path="res://Audio/score_sfx_1.wav" id="2_8id0n"]
+[ext_resource type="AudioStream" uid="uid://dpenr6kbvew8m" path="res://Audio/score_sfx_2.wav" id="3_oqxw3"]
+[ext_resource type="AudioStream" uid="uid://cqc64jyac1xnv" path="res://Audio/score_sfx_3.wav" id="4_yn8v5"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8yi3e"]
+streams_count = 3
+stream_0/stream = ExtResource("2_8id0n")
+stream_1/stream = ExtResource("3_oqxw3")
+stream_2/stream = ExtResource("4_yn8v5")
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_cy1if"]
 clip_count = 2
 clip_0/name = &"Bounce"
-clip_0/stream = ExtResource("1_u8eqc")
+clip_0/stream = ExtResource("1_1kq3q")
 clip_0/auto_advance = 0
 clip_1/name = &"Score"
-clip_1/stream = ExtResource("2_5bcp7")
+clip_1/stream = SubResource("AudioStreamRandomizer_8yi3e")
 clip_1/auto_advance = 0
 
 [node name="SFXPlayer" type="AudioStreamPlayer" unique_id=1718395026]
