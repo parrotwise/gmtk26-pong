@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://i1o5fru2q5cg"]
 
 [ext_resource type="Script" uid="uid://bg2lsv0wic75u" path="res://Scenes/GameUI/hud.gd" id="1_56xkn"]
+[ext_resource type="Texture2D" uid="uid://su2se2y7g5xr" path="res://Sprites/hp.png" id="2_eccdw"]
 [ext_resource type="Texture2D" uid="uid://brsr08lgwm5ak" path="res://Sprites/bar_placeholder.png" id="2_l26h0"]
+[ext_resource type="Texture2D" uid="uid://bask7m4bnnhxh" path="res://Sprites/hp_no.png" id="3_0un6g"]
 [ext_resource type="Texture2D" uid="uid://b7jpgpuws8ief" path="res://Sprites/exit_placeholder.png" id="3_eccdw"]
-[ext_resource type="Texture2D" uid="uid://x001807xjio3" path="res://Sprites/hp0_placeholder.png" id="3_l26h0"]
-[ext_resource type="Texture2D" uid="uid://ch4gxl3p804vh" path="res://Sprites/hp1_placeholder.png" id="4_0un6g"]
 
 [node name="HUD" type="Control" unique_id=1368634265]
 custom_minimum_size = Vector2(800, 40)
@@ -13,8 +13,8 @@ anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 script = ExtResource("1_56xkn")
-heart_full_texture = ExtResource("4_0un6g")
-heart_empty_texture = ExtResource("3_l26h0")
+heart_full_texture = ExtResource("2_eccdw")
+heart_empty_texture = ExtResource("3_0un6g")
 
 [node name="Bar" type="TextureRect" parent="." unique_id=39477478]
 layout_mode = 1
@@ -43,19 +43,19 @@ layout_mode = 2
 [node name="Heart" type="TextureRect" parent="HBoxContainer/CenterContainer/LeftHearts" unique_id=1343077231]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-texture = ExtResource("4_0un6g")
+texture = ExtResource("2_eccdw")
 expand_mode = 1
 
 [node name="Heart2" type="TextureRect" parent="HBoxContainer/CenterContainer/LeftHearts" unique_id=327428545]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-texture = ExtResource("4_0un6g")
+texture = ExtResource("2_eccdw")
 expand_mode = 1
 
 [node name="Heart3" type="TextureRect" parent="HBoxContainer/CenterContainer/LeftHearts" unique_id=35090175]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-texture = ExtResource("4_0un6g")
+texture = ExtResource("2_eccdw")
 expand_mode = 1
 
 [node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer" unique_id=491996571]
@@ -69,19 +69,19 @@ layout_mode = 2
 [node name="Heart" type="TextureRect" parent="HBoxContainer/CenterContainer2/RightHearts" unique_id=2007865467]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-texture = ExtResource("4_0un6g")
+texture = ExtResource("2_eccdw")
 expand_mode = 1
 
 [node name="Heart2" type="TextureRect" parent="HBoxContainer/CenterContainer2/RightHearts" unique_id=1812277997]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-texture = ExtResource("4_0un6g")
+texture = ExtResource("2_eccdw")
 expand_mode = 1
 
 [node name="Heart3" type="TextureRect" parent="HBoxContainer/CenterContainer2/RightHearts" unique_id=2049468968]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-texture = ExtResource("4_0un6g")
+texture = ExtResource("2_eccdw")
 expand_mode = 1
 
 [node name="QuitButton" type="TextureButton" parent="." unique_id=811932129]
