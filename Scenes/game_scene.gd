@@ -10,3 +10,6 @@ func _ready() -> void:
 	GameManager.ball.score.connect(GameManager._on_score)
 	GameManager.player.no_health.connect(GameManager._on_lose_game)
 	GameManager.opponent.no_health.connect(GameManager._on_win_game)
+
+	GameManager.ball.bounce.connect(AudioManager.play.bind(AudioManager.sfx_bounce))
+	GameManager.ball.score.connect(AudioManager.play.bind(AudioManager.sfx_score))
