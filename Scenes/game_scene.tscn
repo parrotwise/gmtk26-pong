@@ -8,8 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://78t4kpwyd0pd" path="res://Sprites/p1.png" id="4_ikfsv"]
 [ext_resource type="Texture2D" uid="uid://d4jsgjfjen0u7" path="res://Sprites/p2.png" id="6_5dgvu"]
 [ext_resource type="Script" uid="uid://ca58xn8hkrbfg" path="res://Scripts/ball.gd" id="6_7iton"]
-[ext_resource type="Texture2D" uid="uid://p5kbp4wbgfep" path="res://Sprites/ball_placeholder.png" id="7_ikfsv"]
+[ext_resource type="Texture2D" uid="uid://cx6fv01ihp8xc" path="res://Sprites/ball.png" id="9_5dgvu"]
 [ext_resource type="PackedScene" uid="uid://i1o5fru2q5cg" path="res://Scenes/GameUI/hud.tscn" id="9_ikfsv"]
+[ext_resource type="Texture2D" uid="uid://bnykdedso0l1l" path="res://Sprites/glow_placeholder.png" id="9_uscyt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6fju"]
 bg_color = Color(0.43, 0.43, 0.43, 1)
@@ -20,8 +21,11 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_662lt"]
 height = 106.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bybji"]
+blend_mode = 1
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ikfsv"]
-radius = 9.0
+radius = 10.5
 
 [node name="GameScene" type="Control" unique_id=2090212088]
 custom_minimum_size = Vector2(800, 450)
@@ -86,9 +90,7 @@ grow_vertical = 2
 position = Vector2(32, 250)
 script = ExtResource("2_1ixah")
 
-[node name="Canvas" type="CanvasGroup" parent="Battlefield/Objects/Player" unique_id=1584502315]
-
-[node name="Sprite" type="Sprite2D" parent="Battlefield/Objects/Player/Canvas" unique_id=1435339467]
+[node name="Sprite" type="Sprite2D" parent="Battlefield/Objects/Player" unique_id=1435339467]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("4_ikfsv")
 
@@ -100,9 +102,7 @@ shape = SubResource("CapsuleShape2D_662lt")
 position = Vector2(768, 250)
 script = ExtResource("4_1ixah")
 
-[node name="Canvas" type="CanvasGroup" parent="Battlefield/Objects/Opponent" unique_id=947483694]
-
-[node name="Sprite" type="Sprite2D" parent="Battlefield/Objects/Opponent/Canvas" unique_id=1926471575]
+[node name="Sprite" type="Sprite2D" parent="Battlefield/Objects/Opponent" unique_id=1926471575]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("6_5dgvu")
 
@@ -114,11 +114,16 @@ shape = SubResource("CapsuleShape2D_662lt")
 position = Vector2(400, 250)
 script = ExtResource("6_7iton")
 
-[node name="Canvas" type="CanvasGroup" parent="Battlefield/Objects/Ball" unique_id=345216627]
+[node name="Glow" type="Sprite2D" parent="Battlefield/Objects/Ball" unique_id=1908385453]
+self_modulate = Color(1, 1, 1, 0.5019608)
+material = SubResource("CanvasItemMaterial_bybji")
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("9_uscyt")
 
-[node name="Sprite" type="Sprite2D" parent="Battlefield/Objects/Ball/Canvas" unique_id=1134265764]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("7_ikfsv")
+[node name="Sprite" type="Sprite2D" parent="Battlefield/Objects/Ball" unique_id=1134265764]
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("9_5dgvu")
+offset = Vector2(22.455, 0)
 
 [node name="Collider" type="CollisionShape2D" parent="Battlefield/Objects/Ball" unique_id=928447187]
 shape = SubResource("CircleShape2D_ikfsv")
