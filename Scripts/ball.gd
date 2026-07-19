@@ -23,6 +23,10 @@ signal score_opponent
 @export_range(0.0, 2.0, 0.1) var reflection_bias_strength: float = 1.0
 @export var pulse_magnitude: float = 1.2
 @export var pulse_period: float = 3
+@export var base_intensity: float = 1.0
+@export var intensity_reset_step: float = 0.1
+
+var player_or_opponent_draw: bool = false
 
 # 180° = reflection direction can be asymptotically vertical
 # 170° = reflection direction can be no less than 5° off the vertical
@@ -79,11 +83,13 @@ func _physics_process(delta: float) -> void:
 		disable()
 		score.emit()
 		score_opponent.emit()
+		player_or_opponent_draw = true
 	
 	elif collision_right:
 		disable()
 		score.emit()
 		score_player.emit()
+		player_or_opponent_draw = false
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -198,10 +204,19 @@ func _on_body_entered(body: Node2D) -> void:
 
 func reset() -> void:
 	$ParticleAnchor/Particles.emitting = true
-	position = get_viewport_rect().size / 2
-	direction = RandUtil.randfloat(PI * 3/4, PI * 5/4)
+	if player_or_opponent_draw:
+		position = GameManager.player.position + Vector2(40.0, 0.0)
+		direction = RandUtil.randfloat(PI+PI * 3/4, PI+PI * 5/4)
+		if GameManager.player.velocity.y > 0:
+			direction += 0.2
+		if GameManager.player.velocity.y < 0:
+			direction -= 0.2
+	else:
+		position = GameManager.opponent.position + Vector2(-40.0, 0.0)
+		direction = RandUtil.randfloat(PI * 3/4, PI * 5/4)
 	angular_speed = RandUtil.randfloat(PI, 2 * PI)
 	set_physics_process(true)
+	intensity = base_intensity + intensity_reset_step * (6 - GameManager.player.health - GameManager.opponent.health)
 
 
 func disable() -> void:

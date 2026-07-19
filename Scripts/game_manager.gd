@@ -7,12 +7,10 @@ var player: Player
 var opponent: Opponent
 var cool_text: CoolText
 
-
 func reset() -> void:
 	player.reset()
 	opponent.reset()
 	ball.reset()
-	ball.intensity = 1
 	hud.reset()
 	cool_text.reset()
 
