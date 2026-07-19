@@ -54,3 +54,4 @@ Vector2i(2, 2): {
 process_mode = 3
 stream = SubResource("AudioStreamInteractive_11l1m")
 bus = &"Music"
+playback_type = 1

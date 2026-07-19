@@ -4,6 +4,7 @@ var hud: HUD
 var ball: Ball
 var player: Player
 var opponent: Opponent
+var cool_text: CoolText
 
 # Reset the state to the start of the game
 func reset() -> void:
@@ -12,6 +13,7 @@ func reset() -> void:
 	opponent.reset()
 	ball.reset()
 	hud.reset()
+	cool_text.reset()
 	
 func _on_win_game() -> void:
 	Debug.info('And there was much rejoicing.')
