@@ -21,6 +21,8 @@ signal score_opponent
 @export var speed: float = 300
 @export var pct_speedup_per_bump: int = 5
 @export_range(0.0, 2.0, 0.1) var reflection_bias_strength: float = 1.0
+@export var pulse_magnitude: float = 1.2
+@export var pulse_period: float = 3
 
 # 180° = reflection direction can be asymptotically vertical
 # 170° = reflection direction can be no less than 5° off the vertical
@@ -38,20 +40,27 @@ var position_y_max: float:
 var collider_radius: float:
 	get: return $Collider.shape.radius
 
+var intensity: float = 1 # scales glow radius, glow pulse frequency, and ball speed
 var direction: float # in radians
 var angular_speed: float # in rad/s
+var pulse_phase: float
 
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 
 	GameManager.ball = self
-	
+
 	reset()
 
 
+func _process(delta: float) -> void:
+	pulse_phase = fmod(pulse_phase + delta, 2 * PI * pulse_period / (4 * intensity))
+	$Glow.scale = intensity * sin(pulse_phase * (4 * intensity) / pulse_period) * pulse_magnitude * Vector2.ONE
+
+
 func _physics_process(delta: float) -> void:
-	position += Vector2(cos(direction), sin(direction)) * speed * delta
+	position += Vector2(cos(direction), sin(direction)) * intensity * speed * delta
 	rotation += angular_speed * delta
 
 	var collision_top: bool = (position.y - collider_radius) <= position_y_min
@@ -163,7 +172,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 	direction += correction
 
-	speed *= 1 + pct_speedup_per_bump / 100.0
+	intensity *= 1 + pct_speedup_per_bump / 100.0
 
 	var angle_delta: float = direction - initial_angle
 	angular_speed -= 2 * angle_delta
