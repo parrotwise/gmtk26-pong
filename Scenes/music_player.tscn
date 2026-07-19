@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://uti6ard88gp6"]
+
+[ext_resource type="AudioStream" uid="uid://cgu1efteo6uo1" path="res://Audio/pong_intro.ogg" id="1_5b442"]
+[ext_resource type="AudioStream" uid="uid://dhprkxw2paang" path="res://Audio/pong.ogg" id="2_y2bv6"]
+[ext_resource type="AudioStream" uid="uid://sgyq0brpaxah" path="res://Audio/pong_outro.ogg" id="3_ftm3w"]
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_11l1m"]
+clip_count = 3
+clip_0/name = &"Intro"
+clip_0/stream = ExtResource("1_5b442")
+clip_0/auto_advance = 1
+clip_0/next_clip = 1
+clip_1/name = &"Loop"
+clip_1/stream = ExtResource("2_y2bv6")
+clip_1/auto_advance = 1
+clip_1/next_clip = 1
+clip_2/name = &"Outro"
+clip_2/stream = ExtResource("3_ftm3w")
+clip_2/auto_advance = 0
+_transitions = {
+Vector2i(-1, -1): {
+"fade_beats": 4.0,
+"fade_mode": 3,
+"from_time": 1,
+"to_time": 1
+},
+Vector2i(0, 0): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(0, 1): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 3,
+"to_time": 1
+},
+Vector2i(1, 1): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(2, 2): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 0
+}
+}
+
+[node name="MusicPlayer" type="AudioStreamPlayer" unique_id=1718395026]
+stream = SubResource("AudioStreamInteractive_11l1m")

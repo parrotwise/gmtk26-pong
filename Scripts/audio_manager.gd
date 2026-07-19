@@ -1,49 +1,38 @@
 extends Node
 
 
-@onready var sfx_bounce: AudioStream = preload('res://Audio/bounce_placeholder.wav')
-@onready var sfx_score: AudioStream = preload('res://Audio/score_placeholder.wav')
-
-@onready var music_loop: AudioStream = preload('res://Audio/main_theme.wav')
-@onready var music_intro: AudioStream = preload('res://Audio/main_theme_intro.wav')
-@onready var music_outro: AudioStream = preload('res://Audio/main_theme_outro.wav')
+var sfx_player_template: PackedScene = preload('res://Scenes/sfx_player.tscn')
+var music_player_template: PackedScene = preload('res://Scenes/music_player.tscn')
 
 
 func _ready() -> void:
-	var sfx_player: AudioStreamPlayer = AudioStreamPlayer.new()
-	sfx_player.name = 'SFXPlayer'
-	add_child(sfx_player)
-
-	var music_player: AudioStreamPlayer = AudioStreamPlayer.new()
-	music_player.name = 'MusicPlayer'
-	add_child(music_player)
+	add_child(sfx_player_template.instantiate())
+	add_child(music_player_template.instantiate())
 
 
-func play(sfx: AudioStream, volume: float = 0.5) -> void:
-	if not has_node('SFXPlayer') or $SFXPlayer.playing:
+func play_sfx(clip_name: StringName, volume: float = 0.5) -> void:
+	if not has_node('SFXPlayer'):
 		return
 	
-	$SFXPlayer.stream = sfx
-	$SFXPlayer.volume_db = linear_to_db(volume)
+	$SFXPlayer.volume_linear = volume
 	$SFXPlayer.pitch_scale = RandUtil.randfloat(0.8, 1.2)
-
-	$SFXPlayer.play()
-
-
-func start_music(volume: float = 0.5) -> void:
-	if not has_node('MusicPlayer') or $MusicPlayer.playing:
-		return
 	
-	$MusicPlayer.stream = music_intro
+	if not $SFXPlayer.playing:
+		$SFXPlayer.play()
+
+	$SFXPlayer.get_stream_playback().switch_to_clip_by_name(clip_name)
+
+
+func play_music(clip_name: StringName = 'Intro', volume: float = 0.5) -> void:
+	if not has_node('MusicPlayer'):
+		return
+
 	$MusicPlayer.volume_linear = volume
 	
-	$MusicPlayer.finished.connect(
-		func() -> void:
-			$MusicPlayer.stream = music_loop
-			$MusicPlayer.play()
-	)
-
-	$MusicPlayer.play()
+	if not $MusicPlayer.playing:
+		$MusicPlayer.play()
+	
+	$MusicPlayer.get_stream_playback().switch_to_clip_by_name(clip_name)
 
 
 func stop_music(fade_out: bool = true, fade_out_duration: float = 2.0) -> void:
@@ -51,13 +40,11 @@ func stop_music(fade_out: bool = true, fade_out_duration: float = 2.0) -> void:
 		return
 	
 	if fade_out:
-		Debug.warning('1')
 		var tween: Tween = get_tree().create_tween()
 		tween.tween_property($MusicPlayer, 'volume_linear', 0, fade_out_duration)
 		tween.finished.connect(stop_music.bind(false))
 	
 	else:
-		Debug.warning('2')
 		for connection: Dictionary in $MusicPlayer.finished.get_connections():
 			$MusicPlayer.finished.disconnect(connection['callable'])
 		

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://be04l1ahxr0pg"]
+
+[ext_resource type="AudioStream" uid="uid://c3vlsgmvsq6kb" path="res://Audio/bounce_placeholder.wav" id="1_u8eqc"]
+[ext_resource type="AudioStream" uid="uid://cembbrry5hh2r" path="res://Audio/score_placeholder.wav" id="2_5bcp7"]
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_cy1if"]
+clip_count = 2
+clip_0/name = &"Bounce"
+clip_0/stream = ExtResource("1_u8eqc")
+clip_0/auto_advance = 0
+clip_1/name = &"Score"
+clip_1/stream = ExtResource("2_5bcp7")
+clip_1/auto_advance = 0
+
+[node name="SFXPlayer" type="AudioStreamPlayer" unique_id=1718395026]
+stream = SubResource("AudioStreamInteractive_cy1if")
+max_polyphony = 2
