@@ -26,6 +26,7 @@ AudioManager="*uid://eusu76adkhm4"
 
 window/size/viewport_width=800
 window/size/viewport_height=450
+window/size/borderless=true
 window/stretch/mode="viewport"
 
 [physics]

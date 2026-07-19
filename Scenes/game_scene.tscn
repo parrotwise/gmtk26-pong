@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://ke4slfpx5tjp" path="res://Scenes/game_scene.gd" id="1_5dgvu"]
 [ext_resource type="Script" uid="uid://ejpyehyvfe3j" path="res://Scripts/battlefield.gd" id="1_6h5vk"]
 [ext_resource type="Script" uid="uid://x2chsq18dd8c" path="res://Scripts/player.gd" id="2_1ixah"]
-[ext_resource type="Texture2D" uid="uid://c5e82as8sxtj" path="res://Sprites/p1_placeholder.png" id="3_rgj8m"]
+[ext_resource type="Texture2D" uid="uid://btx6gaxkkwepl" path="res://Sprites/p1_placeholder.png" id="3_rgj8m"]
 [ext_resource type="Script" uid="uid://dowrysm7015b3" path="res://Scripts/opponent.gd" id="4_1ixah"]
-[ext_resource type="Texture2D" uid="uid://da3ote4yfusag" path="res://Sprites/p2_placeholder.png" id="5_2fmhe"]
+[ext_resource type="Texture2D" uid="uid://ce2ugutng78r4" path="res://Sprites/p2_placeholder.png" id="5_2fmhe"]
 [ext_resource type="Script" uid="uid://ca58xn8hkrbfg" path="res://Scripts/ball.gd" id="6_7iton"]
 [ext_resource type="Texture2D" uid="uid://p5kbp4wbgfep" path="res://Sprites/ball_placeholder.png" id="7_ikfsv"]
 [ext_resource type="PackedScene" uid="uid://i1o5fru2q5cg" path="res://Scenes/GameUI/hud.tscn" id="9_ikfsv"]
@@ -17,7 +17,8 @@ bg_color = Color(0.43, 0.43, 0.43, 1)
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_662lt"]
-height = 104.0
+radius = 6.0
+height = 106.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ikfsv"]
 radius = 9.0
@@ -71,7 +72,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Player" type="CharacterBody2D" parent="Battlefield/Objects" unique_id=1821175186]
-position = Vector2(50, 250)
+position = Vector2(32, 250)
 script = ExtResource("2_1ixah")
 
 [node name="Canvas" type="CanvasGroup" parent="Battlefield/Objects/Player" unique_id=1584502315]
@@ -81,11 +82,11 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_rgj8m")
 
 [node name="Collider" type="CollisionShape2D" parent="Battlefield/Objects/Player" unique_id=1432668304]
-position = Vector2(23, -1)
+position = Vector2(20, 0)
 shape = SubResource("CapsuleShape2D_662lt")
 
 [node name="Opponent" type="StaticBody2D" parent="Battlefield/Objects" unique_id=969242786]
-position = Vector2(750, 250)
+position = Vector2(768, 250)
 script = ExtResource("4_1ixah")
 
 [node name="Canvas" type="CanvasGroup" parent="Battlefield/Objects/Opponent" unique_id=947483694]
@@ -94,8 +95,8 @@ script = ExtResource("4_1ixah")
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("5_2fmhe")
 
-[node name="Collider" type="CollisionShape2D" parent="Battlefield/Objects/Opponent" unique_id=212331946]
-position = Vector2(-24, -1)
+[node name="Collider" type="CollisionShape2D" parent="Battlefield/Objects/Opponent" unique_id=441312096]
+position = Vector2(-21, 0)
 shape = SubResource("CapsuleShape2D_662lt")
 
 [node name="Ball" type="Area2D" parent="Battlefield/Objects" unique_id=1288001104]
