@@ -60,11 +60,6 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Play"
 
-[node name="Quit" type="Button" parent="Menu/CenterContainer/VBoxContainer" unique_id=47914014]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Quit"
-
 [node name="GameScene" parent="." unique_id=2090212088 instance=ExtResource("2_ci1se")]
 unique_name_in_owner = true
 visible = false

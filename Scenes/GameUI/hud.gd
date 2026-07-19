@@ -17,13 +17,10 @@ func _ready() -> void:
 	# Register
 	GameManager.hud = self
 	
-	# Signals
-	quit_button.pressed.connect(_on_quit)
-	# TODO: Listen for score change
-	# some_signal.connect(_update_hearts)
-	# ↑ EDIT Parrot: The GameScene listens for scores,
+	# Parrot: The GameScene listens for scores,
 	# tells the losing side to take damage, then
 	# they do so and tell the HUD to update
+	# Agecaf: The Menu scene listens to the quit button
 
 # Reset the HUD
 func reset():
@@ -53,7 +50,3 @@ func _on_opponent_health_changed(new_health : int) -> void:
 			heart.texture = heart_full_texture
 		else: 
 			heart.texture = heart_empty_texture
-
-func _on_quit() -> void:
-	# TODO: Go back to main menu instead!
-	get_tree().quit()

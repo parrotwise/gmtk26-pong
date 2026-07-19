@@ -3,7 +3,6 @@ class_name MainMenu extends Node2D
 @onready var menu: Control = %Menu
 @onready var game_scene: GameScene = %GameScene
 @onready var play_button: Button = %Play
-@onready var quit_button: Button = %Quit
 @onready var victory_defeat_label: Label = %VictoryOrDefeatLabel
 
 # Initialization
@@ -14,7 +13,6 @@ func _ready() -> void:
 	
 	# Signals
 	play_button.pressed.connect(_on_play)
-	quit_button.pressed.connect(_on_quit)
 	
 	# Wait for everything to be registered
 	_ready_deferred.call_deferred()
@@ -22,6 +20,7 @@ func _ready() -> void:
 func _ready_deferred():
 	GameManager.player.no_health.connect(_game_end)
 	GameManager.opponent.no_health.connect(_game_end)
+	GameManager.hud.quit_button.pressed.connect(_game_end)
 	
 
 # Go to game scene
@@ -47,7 +46,3 @@ func _game_end() -> void:
 	victory_defeat_label.text = ""
 	game_scene.hide()
 	menu.show()
-
-# Quit game
-func _on_quit() -> void:
-	get_tree().quit()
