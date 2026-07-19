@@ -4,7 +4,7 @@ extends CharacterBody2D
 signal no_health
 signal health_changed(new_health : int)
 
-@export var speed: float = 150
+@export var speed: float = 200
 
 var collider: CollisionShape2D:
 	get: return $Collider

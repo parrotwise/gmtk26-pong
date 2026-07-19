@@ -134,6 +134,7 @@ grow_vertical = 2
 [node name="Player" type="CharacterBody2D" parent="Battlefield/Objects" unique_id=1821175186]
 position = Vector2(32, 250)
 script = ExtResource("2_1ixah")
+speed = 200.0
 
 [node name="Sprite" type="Sprite2D" parent="Battlefield/Objects/Player" unique_id=1435339467]
 scale = Vector2(0.25, 0.25)

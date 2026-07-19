@@ -18,8 +18,8 @@ signal score_player
 signal score_opponent
 
 
-@export var speed: float = 250
-@export var pct_speedup_per_bump: int = 2
+@export var speed: float = 300
+@export var pct_speedup_per_bump: int = 5
 @export_range(0.0, 2.0, 0.1) var reflection_bias_strength: float = 1.0
 
 # 180° = reflection direction can be asymptotically vertical
