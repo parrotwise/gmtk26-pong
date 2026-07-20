@@ -13,3 +13,10 @@ func _ready() -> void:
 
 	GameManager.ball.bounce.connect(AudioManager.play_sfx.bind('Bounce'))
 	GameManager.ball.score.connect(AudioManager.play_sfx.bind('Score'))
+
+# Helper functions (Made these to make the code more self-documenting)
+func pause_game_objects() -> void:
+	process_mode = PROCESS_MODE_DISABLED
+
+func unpause_game_objects() -> void:
+	process_mode = PROCESS_MODE_INHERIT

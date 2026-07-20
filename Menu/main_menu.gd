@@ -35,7 +35,7 @@ func _on_play() -> void:
 	play_button.disabled = true
 	get_tree().paused = false 
 	
-	game_scene.process_mode = PROCESS_MODE_DISABLED
+	game_scene.pause_game_objects()
 	
 	await Transition.fade_in_black()
 	
@@ -43,12 +43,11 @@ func _on_play() -> void:
 	GameManager.reset()
 	menu.hide()
 	
-	game_scene.process_mode = PROCESS_MODE_INHERIT
+	game_scene.unpause_game_objects()
 	
 	AudioManager.play_music("Intro")
 	
 	await Transition.fade_out_black()
-	
 	
 	play_button.disabled = false
 
@@ -63,7 +62,7 @@ func _game_end() -> void:
 	else:
 		victory_defeat_label.text = "Defeat"
 	
-	game_scene.process_mode = PROCESS_MODE_DISABLED
+	game_scene.pause_game_objects()
 	
 	victory_defeat_label.modulate.a = 0.0
 	victory_defeat_label.show()
@@ -98,4 +97,3 @@ func _set_sfx_volume(value: float):
 	
 	AudioServer.set_bus_mute(2, value <= 5.0)
 	AudioServer.set_bus_volume_linear(2, value / 200.0)
-	
