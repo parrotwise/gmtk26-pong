@@ -13,9 +13,11 @@ var top_limit: float:
 var bottom_limit: float:
 	get: return get_viewport_rect().size.y - (collider.shape.height / 2)
 
+var start_position: Vector2
 var health: int
 
 func _ready() -> void:
+	start_position = position
 	reset()
 	GameManager.player = self
 
@@ -40,3 +42,5 @@ func lose_health() -> void:
 		
 func reset() -> void:
 	health = 5
+	position = start_position
+	velocity = Vector2.ZERO 

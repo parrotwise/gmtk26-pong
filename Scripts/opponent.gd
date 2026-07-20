@@ -25,9 +25,11 @@ var health: int
 var direction: Direction
 var velocity: float
 var reaction_cooldown: float
-
+var start_position: Vector2
 
 func _ready() -> void:
+	start_position = position
+	
 	reset()
 	GameManager.opponent = self
 
@@ -75,5 +77,6 @@ func lose_health() -> void:
 func reset():
 	health = 5
 	direction = Direction.DOWN
+	position = start_position
 	velocity = 0
 	reaction_cooldown = 0
