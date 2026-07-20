@@ -9,9 +9,9 @@ signal health_changed(new_health : int)
 var collider: CollisionShape2D:
 	get: return $Collider
 var top_limit: float:
-	get: return GameManager.hud.bar.size.y + $Collider.shape.height / 2
+	get: return GameManager.hud.bar.size.y + collider.shape.height / 2
 var bottom_limit: float:
-	get: return get_viewport_rect().size.y - ($Collider.shape.height / 2)
+	get: return get_viewport_rect().size.y - (collider.shape.height / 2)
 
 var health: int
 
@@ -39,4 +39,4 @@ func lose_health() -> void:
 		no_health.emit()
 		
 func reset() -> void:
-	health = 3
+	health = 5

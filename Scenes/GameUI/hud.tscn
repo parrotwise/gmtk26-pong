@@ -58,6 +58,18 @@ layout_mode = 2
 texture = ExtResource("2_eccdw")
 expand_mode = 1
 
+[node name="Heart4" type="TextureRect" parent="HBoxContainer/CenterContainer/LeftHearts" unique_id=1694643222]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_eccdw")
+expand_mode = 1
+
+[node name="Heart5" type="TextureRect" parent="HBoxContainer/CenterContainer/LeftHearts" unique_id=1825395791]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_eccdw")
+expand_mode = 1
+
 [node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer" unique_id=491996571]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -79,6 +91,18 @@ texture = ExtResource("2_eccdw")
 expand_mode = 1
 
 [node name="Heart3" type="TextureRect" parent="HBoxContainer/CenterContainer2/RightHearts" unique_id=2049468968]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_eccdw")
+expand_mode = 1
+
+[node name="Heart4" type="TextureRect" parent="HBoxContainer/CenterContainer2/RightHearts" unique_id=1020916421]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_eccdw")
+expand_mode = 1
+
+[node name="Heart5" type="TextureRect" parent="HBoxContainer/CenterContainer2/RightHearts" unique_id=1071750281]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 texture = ExtResource("2_eccdw")

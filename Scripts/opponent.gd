@@ -14,9 +14,9 @@ signal no_health
 var collider: CollisionShape2D:
 	get: return $Collider
 var top_limit: float:
-	get: return GameManager.hud.bar.size.y + $Collider.shape.height / 2
+	get: return GameManager.hud.bar.size.y + collider.shape.height / 2
 var bottom_limit: float:
-	get: return get_viewport_rect().size.y - ($Collider.shape.height / 2)
+	get: return get_viewport_rect().size.y - (collider.shape.height / 2)
 
 @export var speed: float = 250
 @export var reaction_time: float = .25
@@ -56,10 +56,10 @@ func _physics_process(delta: float) -> void:
 		if ball_facing_right:
 			reaction_cooldown = reaction_time
 
-			if GameManager.ball.position.y > (position.y + $Collider.shape.height / 2):
+			if GameManager.ball.position.y > (position.y + collider.shape.height / 2):
 				direction = Direction.DOWN
-			elif GameManager.ball.position.y < (position.y - $Collider.shape.height / 2):
-				direction = Direction.UP < (position.y + $Collider.shape.height / 2)
+			elif GameManager.ball.position.y < (position.y - collider.shape.height / 2):
+				direction = Direction.UP < (position.y + collider.shape.height / 2)
 			else:
 				direction = Direction.NONE
 
@@ -73,7 +73,7 @@ func lose_health() -> void:
 		no_health.emit()
 
 func reset():
-	health = 3
+	health = 5
 	direction = Direction.DOWN
 	velocity = 0
 	reaction_cooldown = 0

@@ -16,11 +16,6 @@ var bar: TextureRect:
 func _ready() -> void:
 	# Register
 	GameManager.hud = self
-	
-	# Parrot: The GameScene listens for scores,
-	# tells the losing side to take damage, then
-	# they do so and tell the HUD to update
-	# Agecaf: The Menu scene listens to the quit button
 
 # Reset the HUD
 func reset():
