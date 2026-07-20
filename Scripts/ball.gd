@@ -9,7 +9,7 @@ enum Direction {
 }
 
 
-signal bounce
+signal bounce_sfx
 signal bounce_wall
 signal bounce_player
 signal bounce_opponent
@@ -54,8 +54,6 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 
 	GameManager.ball = self
-
-	reset()
 
 
 func _process(delta: float) -> void:
@@ -102,13 +100,13 @@ func _on_body_entered(body: Node2D) -> void:
 		elif body.velocity.y < 0:
 			body_motion = Direction.UP
 		
-		bounce.emit()
+		bounce_sfx.emit()
 		bounce_player.emit()
 	
 	elif body is Opponent:
 		body_motion = body.direction
 
-		bounce.emit()
+		bounce_sfx.emit()
 		bounce_opponent.emit()
 	
 	var reflection_bias: float = 0
@@ -202,7 +200,11 @@ func _on_body_entered(body: Node2D) -> void:
 	angular_speed -= 2 * angle_delta
 
 
+# Maybe make it so the ball starts at the center and it's direction is towards
+# whoever lost the previous round? - Zerok
 func reset() -> void:
+	bounce_sfx.emit()
+	
 	$ParticleAnchor/Particles.emitting = true
 	if player_or_opponent_draw:
 		position = GameManager.player.position + Vector2(40.0, 0.0)

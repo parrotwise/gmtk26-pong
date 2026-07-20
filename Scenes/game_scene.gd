@@ -11,7 +11,7 @@ func _ready() -> void:
 	GameManager.player.no_health.connect(GameManager._on_lose_game)
 	GameManager.opponent.no_health.connect(GameManager._on_win_game)
 
-	GameManager.ball.bounce.connect(AudioManager.play_sfx.bind('Bounce'))
+	GameManager.ball.bounce_sfx.connect(AudioManager.play_sfx.bind('Bounce'))
 	GameManager.ball.score.connect(AudioManager.play_sfx.bind('Score'))
 
 # Helper functions (Made these to make the code more self-documenting)
