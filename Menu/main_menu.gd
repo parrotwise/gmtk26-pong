@@ -45,12 +45,18 @@ func _on_play() -> void:
 	
 	game_scene.process_mode = PROCESS_MODE_INHERIT
 	
+	AudioManager.play_music("Intro")
+	
 	await Transition.fade_out_black()
+	
 	
 	play_button.disabled = false
 
 # Return to main menu on game end.
 func _game_end() -> void:
+	
+	AudioManager.stop_music(true, 2.0)
+	
 	# Show victory or defeat text
 	if GameManager.opponent.health == 0:
 		victory_defeat_label.text = "Victory"
