@@ -21,6 +21,7 @@ Debug="*uid://dtu6x4vbmnofy"
 RandUtil="*uid://cg4b22r31tmss"
 GameManager="*uid://jxfpimqr4msc"
 AudioManager="*uid://eusu76adkhm4"
+Transition="*uid://dk1x3gggk316p"
 
 [display]
 

@@ -32,10 +32,22 @@ func _ready_deferred():
 
 # Go to game scene
 func _on_play() -> void:
+	play_button.disabled = true
+	get_tree().paused = false 
+	
+	game_scene.process_mode = PROCESS_MODE_DISABLED
+	
+	await Transition.fade_in_black()
+	
 	game_scene.show()
 	GameManager.reset()
-	get_tree().paused = false
 	menu.hide()
+	
+	game_scene.process_mode = PROCESS_MODE_INHERIT
+	
+	await Transition.fade_out_black()
+	
+	play_button.disabled = false
 
 # Return to main menu on game end.
 func _game_end() -> void:
@@ -44,15 +56,29 @@ func _game_end() -> void:
 		victory_defeat_label.text = "Victory"
 	else:
 		victory_defeat_label.text = "Defeat"
-	get_tree().paused = true
 	
-	# Wait a bit
+	game_scene.process_mode = PROCESS_MODE_DISABLED
+	
+	victory_defeat_label.modulate.a = 0.0
+	victory_defeat_label.show()
+	
+	var fade_duration = 0.4
+	
+	# Fade in the label
+	var tween = create_tween()
+	tween.tween_property(victory_defeat_label, "modulate:a", 1.0, fade_duration)
+	await tween.finished
+	
 	await get_tree().create_timer(1.0).timeout
 	
-	# Return to main menu
+	# return to menu with the fade to black transition
+	await Transition.fade_in_black(0.5)
+	
 	victory_defeat_label.text = ""
 	game_scene.hide()
 	menu.show()
+	
+	await Transition.fade_out_black(0.5)
 
 # Set the Volume
 func _set_music_volume(value: float):
